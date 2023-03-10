@@ -75,6 +75,7 @@ func Routers() *gin.Engine {
 		gameListRouter := router.RouterGroupApp.GameList
 		gameListRouter.InitYp_gamesRouter(PrivateGroup)
 		gameListRouter.InitYp_gamer_dataRouter(PrivateGroup)
+		gameListRouter.InitYp_game_eventRouter(PrivateGroup)
 	}
 
 	global.GVA_LOG.Info("router register success")
