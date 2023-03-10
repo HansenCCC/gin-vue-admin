@@ -52,9 +52,9 @@
             <template #default="scope">{{ formatDate(scope.row.CreatedAt) }}</template>
         </el-table-column>
         <el-table-column align="left" label="事件名称" prop="event_name" width="120" />
-        <el-table-column align="left" label="唯一标识" prop="uuid" width="120" />
+        <el-table-column align="left" label="唯一标识" prop="uuid" width="180" />
         <el-table-column align="left" label="json填充" prop="properties" width="120" />
-        <el-table-column align="left" label="按钮组">
+        <el-table-column align="left" label="操作">
             <template #default="scope">
             <el-button type="primary" link icon="edit" class="table-button" @click="updateYp_game_eventFunc(scope.row)">变更</el-button>
             <el-button type="primary" link icon="delete" @click="deleteRow(scope.row)">删除</el-button>
