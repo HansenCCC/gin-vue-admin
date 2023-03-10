@@ -40,71 +40,70 @@ const router = useRouter()
 
 const type = ref('')
 const formData = ref({
-            game_name: '',
-            game_grade: 0,
-        })
+  game_name: '',
+  game_grade: 0,
+})
 // 验证规则
 const rule = reactive({
-               game_name : [{
-                   required: true,
-                   message: '',
-                   trigger: ['input','blur'],
-               }],
-               game_grade : [{
-                   required: true,
-                   message: '',
-                   trigger: ['input','blur'],
-               }],
+  game_name: [{
+    required: true,
+    message: '',
+    trigger: ['input', 'blur'],
+  }],
+  game_grade: [{
+    required: true,
+    message: '',
+    trigger: ['input', 'blur'],
+  }],
 })
 
 const elFormRef = ref()
 
 // 初始化方法
 const init = async () => {
- // 建议通过url传参获取目标数据ID 调用 find方法进行查询数据操作 从而决定本页面是create还是update 以下为id作为url参数示例
-    if (route.query.id) {
-      const res = await findYp_games({ ID: route.query.id })
-      if (res.code === 0) {
-        formData.value = res.data.reyp_games
-        type.value = 'update'
-      }
-    } else {
-      type.value = 'create'
+  // 建议通过url传参获取目标数据ID 调用 find方法进行查询数据操作 从而决定本页面是create还是update 以下为id作为url参数示例
+  if (route.query.id) {
+    const res = await findYp_games({ ID: route.query.id })
+    if (res.code === 0) {
+      formData.value = res.data.reyp_games
+      type.value = 'update'
     }
+  } else {
+    type.value = 'create'
+  }
 }
 
 init()
 // 保存按钮
-const save = async() => {
-      elFormRef.value?.validate( async (valid) => {
-         if (!valid) return
-            let res
-           switch (type.value) {
-             case 'create':
-               res = await createYp_games(formData.value)
-               break
-             case 'update':
-               res = await updateYp_games(formData.value)
-               break
-             default:
-               res = await createYp_games(formData.value)
-               break
-           }
-           if (res.code === 0) {
-             ElMessage({
-               type: 'success',
-               message: '创建/更改成功'
-             })
-           }
-       })
+const save = async () => {
+  elFormRef.value?.validate(async (valid) => {
+    if (!valid) return
+    let res
+    switch (type.value) {
+      case 'create':
+        res = await createYp_games(formData.value)
+        break
+      case 'update':
+        res = await updateYp_games(formData.value)
+        break
+      default:
+        res = await createYp_games(formData.value)
+        break
+    }
+    if (res.code === 0) {
+      ElMessage({
+        type: 'success',
+        message: '创建/更改成功'
+      })
+    }
+  })
 }
 
 // 返回按钮
 const back = () => {
-    router.go(-1)
+  router.go(-1)
 }
 
 </script>
 
-<style>
-</style>
+<style></style>
